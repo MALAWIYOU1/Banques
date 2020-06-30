@@ -21,6 +21,8 @@ Client >> compte: uncompte [
 
 { #category : #operation }
 Client >> depot:aNumber [
+( self compte etat) ifFalse: [ Transcript show: 'Votre compte est fermé';cr.
+	^False ].
 	(aNumber <1)
 		ifTrue: [ ^0 ]
 		ifFalse: [ 

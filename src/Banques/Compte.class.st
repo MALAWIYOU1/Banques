@@ -9,7 +9,7 @@ Class {
 	#category : #Banques
 }
 
-{ #category : #accessing }
+{ #category : #getters }
 Compte >> etat [
 "permet de savoir si un compte est fermer ou pas "
 	^ etat
@@ -44,6 +44,6 @@ Compte >> numero [
 ]
 
 { #category : #accessing }
-Compte >> numero: anObject [
-	numero := anObject
+Compte >> numero: aNumber [
+	numero:= aNumber 
 ]
