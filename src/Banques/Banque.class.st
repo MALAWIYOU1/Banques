@@ -3,8 +3,7 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'clientList',
-		'compteList',
-		'etat'
+		'compteList'
 	],
 	#category : #Banques
 }
@@ -16,7 +15,7 @@ Banque >> clientList [
 
 { #category : #accessing }
 Banque >> clientList: unClient [
-		clientList:= (self clientList) addFirst: unClient 
+	 clientList addFirst: unClient
 ]
 
 { #category : #accessing }
@@ -26,27 +25,34 @@ Banque >> compteList [
 
 { #category : #accessing }
 Banque >> compteList: unCompte [
-	compteList:= (self compteList )addFirst: unCompte 
- 
+	  compteList addFirst: unCompte
 ]
 
 { #category : #operation }
-Banque >> creerCompte:unCompte client: unClient [
-	|compte client banque|
-	client:= unClient.
-	compte:= unCompte.
-	compte initialize.
-	client initialize.
-	banque:= self.
-	compte numero: ((banque compteList ) first ) numero + 1.
-	client id: ((banque clientList ) first ) id + 1 .
-	client compte: compte
+Banque >> creerCompte: unCompte client: unClient [
+	| compte client banque tail|
+	banque := self .
+	client := unClient.
+	compte := unCompte.
+
+	client compte: compte.
+	self compteList: compte.
+	self clientList: client.
+	 
+ 	client  id: (banque clientList at: 1 )id + 1 .
+ 
+ compte  numero: (banque compteList at: 1 )numero + 1 
+ 
+		
+ 
+	
+	 
 ]
 
 { #category : #initalize }
 Banque >> initialize [ 
 	"comment stating purpose of message"
 		super initialize.
-		self compteList: OrderedCollection new.
-		self clientList: OrderedCollection new 
+		 compteList:= OrderedCollection new.
+		  clientList:= OrderedCollection new 
 ]

@@ -20,17 +20,13 @@ Client >> compte: uncompte [
 ]
 
 { #category : #operation }
-Client >> depot:aNumber [
-( self compte etat) ifFalse: [ Transcript show: 'Votre compte est fermé';cr.
-	^False ].
-	(aNumber <1)
-		ifTrue: [ ^0 ]
-		ifFalse: [ 
-			(self compte) montant:(self compte + aNumber).
-			^1 
-			]
-	
-
+Client >> depot: aNumber [
+	self compte etat
+		ifFalse: [^ false ].
+	aNumber < 1
+		ifTrue: [ ^ false ]
+		ifFalse: [ self compte montant: self compte+ aNumber.
+			^ true ]
 ]
 
 { #category : #accessing }
@@ -46,9 +42,9 @@ Client >> id: anObject [
 { #category : #initialize }
 Client >> initialize [ 
 	super initialize.
-	self nom: ''.
-	self id: 0.
-	self compte: nil
+	  nom:= ''.
+	  id:= 0.
+	  compte:= nil
 ]
 
 { #category : #accessing }
@@ -64,16 +60,16 @@ Client >> nom: anObject [
 { #category : #operation }
 Client >> retirer:aNumber [
   ( self compte etat) ifFalse: [ Transcript show: 'Votre compte est fermé';cr.
-	^False ].
+	^false ].
 	(aNumber <1)
-		ifTrue: [ ^0 ]
+		ifTrue: [ ^false ]
 		ifFalse: [ 
 			(self compte montant > aNumber )
 			ifFalse: [ Transcript show: 'Solde insuffisant';cr.
-				^False]
+				^false]
 			ifTrue:[
 				(self compte) montant:(self compte - aNumber).
-				^True
+				^true
 				]	 
 			]
 	
@@ -83,15 +79,15 @@ Client >> retirer:aNumber [
 { #category : #operation }
 Client >> transferer:aNumber a: unClient [
 ( self compte etat) ifFalse: [ Transcript show: 'Votre compte est fermé';cr.
-	^False ].
+	^false ].
 	(aNumber <1)
-		ifTrue: [ ^False ]
+		ifTrue: [ ^false ]
 		ifFalse: [ 
 				(self retirer: aNumber) 
 					ifTrue: [
 						(unClient depot: aNumber)
-								ifTrue: [^True]
-								ifFalse: [ ^False ]
+								ifTrue: [^true]
+								ifFalse: [ ^false ]
 						]	
 					]
 ]

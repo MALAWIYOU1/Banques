@@ -23,9 +23,9 @@ Compte >> etat: aBoolean [
 
 { #category : #initalize }
 Compte >> initialize [
-	self montant: 0.
-	self numero: 0.
-	self etat: True
+	  montant:= 0.
+	  numero:= 0.
+	  etat:= true
 ]
 
 { #category : #getters }
